@@ -7,7 +7,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/usestate" element={<UseStateHook />} />
+        <Route path="/usestatehook" element={<UseStateHook />} />
       </Routes>
     </Router>
   );
