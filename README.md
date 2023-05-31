@@ -7,7 +7,7 @@
 A comprehensive, practical guide to React State Management, covering the three types:
 
 1. Native State Management (incl. useState, useReducer & useEffect hooks)
-2. Indirect StateManagement (incl. React Query, React Location & React Router)
+2. Indirect State Management (incl. React Query, React Location & React Router)
 3. Direct State Management (incl. Redux, Zustand, Valtio & Jotai)
 
 <strong>Stacks Used</strong><br>
