@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import UseStateHook from "./pages/useStateHook";
+import UseStateHook from "./pages/UseStateHook";
 import Home from "./pages/Home";
 
 function App() {
