@@ -5,7 +5,7 @@ const Home = () => {
     <nav className="navbar">
       <ul>
         <li>
-          <Link to="/usestatehook">useState</Link>
+          <Link to="/UseStateHook">useState</Link>
         </li>
         <li>useReducer</li>
         <li>useMemo & useCallback</li>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function UseStateHook() {
+export default function UseStateHook() {
   const [count, setCount] = useState(10);
 
   function incrementValue() {
@@ -48,5 +48,3 @@ function UseStateHook() {
     </div>
   );
 }
-
-export default UseStateHook;
