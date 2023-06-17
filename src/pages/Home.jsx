@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom";
+
 const Home = () => {
   return (
     <nav className="navbar">
       <ul>
         <li>
-          <a href="/usestatehook">useState</a>
+          <Link to="/usestatehook">useState</Link>
         </li>
         <li>useReducer</li>
         <li>useMemo & useCallback</li>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function UseStateHook() {
+function UseStateHook() {
   const [count, setCount] = useState(10);
 
   function incrementValue() {
@@ -42,9 +42,11 @@ export default function UseStateHook() {
         <br />
         <br />
         {`function incrementValue() {
-    setCount(count + 1);
-  }`}
+          setCount(count + 1);
+        }`}
       </p>
     </div>
   );
 }
+
+export default UseStateHook;
