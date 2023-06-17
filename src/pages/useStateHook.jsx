@@ -13,13 +13,13 @@ export default function UseStateHook() {
       <Header />
       <div>
         <p>
-          const [count, setCount] = useState(10);
+          const [count, setCount] = useState();
           <br />
           <br />
           The output of useState() is an array. The first item is the current
           value of the piece of state (here, &quot;count&quot;) and the second
           item is the setter function:<br></br>
-          <br></br>const [count, setCount] = useState(); <br></br>
+          <br></br>const [count, setCount] = useState(10); <br></br>
           <br></br>useState(10) creates an array with the value 10. Within this
           array, the first item is the current value of that piece of state,
           which is assigned to the variable &quot;count&quot; Here in this
