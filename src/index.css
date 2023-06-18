@@ -88,3 +88,19 @@ button:focus-visible {
 .header-title {
   font-size: 1.2rem;
 }
+
+.content-title {
+  font-size: clamp(1.5rem, 0.9718rem + 2.2535vw, 3rem);
+}
+
+@media only screen and (width >= 769px) {
+  main {
+    width: 50%;
+  }
+}
+
+@media only screen and (width <= 768px) {
+  main {
+    width: 100%;
+  }
+}
