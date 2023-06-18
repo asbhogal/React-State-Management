@@ -14,8 +14,13 @@ export default function UseStateHook() {
       <h2 className="content-title">useState()</h2>
       <main>
         <p>
-          const [count, setCount] = useState();
+          For this, we will use a simple button with an initial value that
+          increases by one every time it is clicked.
           <br />
+          <br />
+          <span className="code-text">
+            const [count, setCount] = useState();
+          </span>
           <br />
           The output of useState() is an array. The first item is the current
           value of the piece of state (here, &quot;count&quot;) and the second
@@ -35,33 +40,31 @@ export default function UseStateHook() {
           The button is assigned the current value of count.
           <br />
           <br />
-          To increment this when the button is clicked, append the onClick event
-          attribute and pass it a function, for e.g.:
+          To increment this when the button is clicked, we append the onClick
+          event attribute and pass it a function, for e.g.:
           <br />
           <br />
-          &sdot; {`onClick={incrementValue}`}
-          <br />
+          <span className="code-text">{`onClick={incrementValue}`}</span>
           <br />
           Then before the return():
           <br />
           <br />
-          &sdot;{" "}
-          {`function incrementValue() {
+          <span className="code-text">{`function incrementValue() {
           setCount(count + 1);
-        }`}
-          <br />
+        }`}</span>
           <br />
           At this point, we have the following code:
           <br />
           <br />
-          &sdot; {`const [count, setCount] = useState(10);`}
-          <br />
-          {`function incrementValue() {
-    setCount(count + 1);
-  }`}
-          <br />
-          {`button onClick={incrementValue}>Count = {count}</button>`}
-          <br />
+          <span className="code-text">
+            {`const [count, setCount] = useState(10);`}
+            <br />
+            {`function incrementValue() {
+              setCount(count + 1);
+            }`}
+            <br />
+            {`return(<button onClick={incrementValue}>Count = {count}</button>)`}
+          </span>
           <br />
           What we&apos;ve done here is create a simple React component that
           manages a count value and provide it a button to increment it.
@@ -84,19 +87,26 @@ export default function UseStateHook() {
           increments (ie. adds 1) to the count value when called. This function
           is responsible for updating the state.
           <br />
-          (NB. inside the incrementValue function, setCount(count + 1); is
+          &sdot; Inside the incrementValue function, setCount(count + 1); is
           called to update the count state. It takes the current value of count,
           adds 1 to it and sets the new value as the updated state value. This
           then triggers a re-render of the component, which then reflects the
-          updated value in the UI/button)
+          updated value in the UI/button
           <br />
           <br />
           3. The button has an onClick attribute that specifies the
           incrementValue function as the event handler when the button is
           clicked.
           <br />
+          &sdot; When the button is clicked, the onClick event triggers the
+          incrementValue function, which in turn updates the state by invoking
+          the setCount function. <br />
+          &sdot; The text displayed on the button is {`Count={count}`} which
+          shows the current value of count in the UI at that point in time.
           <br />
-          NB. count++ won&apos;t work. To understand why, see the case below:
+          <br />
+          NB. Using <span className="code-text">count++ </span>to increment the
+          value won&apos;t work. To understand why, see the case below:
           <br />
           <br />
           &sdot;{" "}
