@@ -3,6 +3,7 @@ import UseStateHook from "./pages/useStateHook";
 import Home from "./pages/Home";
 import "@fontsource/mulish/400.css";
 import "@fontsource/mulish/700.css";
+import "@fontsource/mulish/400-italic.css";
 function App() {
   return (
     <Router>
