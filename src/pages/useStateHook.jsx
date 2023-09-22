@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Header from "../components/Header";
+import BackButton from "../components/BackButton";
 
 function Counter() {
   const [count, setCount] = useState(10);
@@ -15,6 +16,11 @@ function NameList() {
   const [list, setList] = useState(["Frodo", "Samwise", "Gandalf", "Gollum"]);
   const [name, setName] = useState("");
 
+  const onAddName = () => {
+    setList([...list, name]);
+    setName("");
+  };
+
   return (
     <div>
       <ul>
@@ -28,6 +34,7 @@ function NameList() {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
+      <button onClick={onAddName}>Add Name</button>
     </div>
   );
 }
@@ -37,6 +44,7 @@ export default function UseStateHook() {
     <>
       <Header />
       <main>
+        <BackButton />
         <h2 className="content-title">useState()</h2>
         <p>
           For this, we will use a simple button with an initial value that
@@ -223,6 +231,101 @@ export default function UseStateHook() {
           initiated as an empty scalar string.
         </p>
         <img src="/screenshots/useState/19.jpeg" alt="code screenshot" />
+        <p>
+          An event now occurs when the text changes. The event has a value for
+          the current target (the target of that event being the input itself).
+          Within this target, there is the current value (ie. the last text
+          entered by the user or the last state of the text field.) We use the
+          setName setter function here, as assigning the value to the name
+          &apos;name&apos; itself will just return copies (as seen earlier.)
+        </p>
+        <p>
+          A button is now needed in order to append the input field data to the
+          list. A click handler will ensure the button will respond to being
+          interacted with, which will call a function to perform this.
+        </p>
+        <img src="/screenshots/useState/20.jpeg" alt="code screenshot" />
+        <p>
+          At this point, we&apos;ll create the onAddName function and assess
+          three different approaches to the logic.
+        </p>
+        <p>Approach 1 - Pushing the name to the list array</p>
+        <img src="/screenshots/useState/21.jpeg" alt="code screenshot" />
+        <p>
+          When we do this, add a name and press the button, nothing happens.
+          However, when we change the state of the component (ie. press
+          backspace), a re-render occurs and the entered value is appended to
+          the end of the list of names (the full text entered is shown in the
+          list). Pressing backspace changes the state of the name field (which
+          calls setName()).
+        </p>
+        <p>setName() then does two things:</p>
+        <ol>
+          <li>Sets the name</li>
+          <li>Enqueues a re-render request for the component</li>
+        </ol>
+        <p>
+          When the re-render happens, the same list is returned here. This shows
+          the difference between scalars and references. When React is provided
+          a reference to a particular array, it holds a reference to that array
+          (not the data itself) which it then returns. The push() function is an
+          in-place command to mutate that data of that array in place. This is
+          why when we manually refresh the page, the updated data is shown.
+        </p>
+        <p>
+          The problem however is React doesn&apos;t know this has been done.
+          This is why the second purpose of a setter function doesn&apos;t
+          occur.
+        </p>
+        <p>Approach 2 - Explicitely calling the setter function after</p>
+        <img src="/screenshots/useState/22.jpeg" alt="code screenshot" />
+        <p>
+          However, when we do this and then try and add a name this time,
+          nothing happens. This is because when it comes to useState and calling
+          the setter function, it looks at the old value and the new value. If
+          these two are the same, nothing happens. The problem here is we&apos;e
+          giving it back the same reference we had before - ie. the setter
+          function is looking at the two <strong>references</strong> and
+          realising it&apos; the same array. Because of this, it doesn&apos;t
+          enqueue a re-render request.
+        </p>
+        <p>
+          Therefore in order to make this work (ie. dynamically re-render and
+          update the list each time new data is added and the button is
+          pressed), instead of in-place mutating the array, a{" "}
+          <strong>new</strong> array with a different <strong>reference</strong>{" "}
+          is created with the contents of the <strong>old</strong> array plus
+          the <strong>new</strong> one
+        </p>
+        <p>Approach 3 - Giving the setter function a new array</p>
+        <img src="/screenshots/useState/23.jpeg" alt="code screenshot" />
+        <p>
+          This now spreads the contents of the existing &apos;list&apos; array
+          and adds the contents of the new &apos;name&apos; array to the end of
+          it. This also preserves the immutability of the original array,
+          therefore push() function is no longer required (mutating the existing
+          array, as seen above, can result in React not being able to track the
+          changes correctly.)
+        </p>
+        <p>
+          React encourages immutability when updating state (recommended way).
+          This way shown above ensures a new state is created based on the
+          current state, which in turn allows React to track changes and trigger
+          re-renders when necessary.
+        </p>
+        <p>
+          After each state update (from the function call), we can also clear
+          the input box for the next data:
+        </p>
+        <img src="/screenshots/useState/24.jpeg" alt="code screenshot" />
+        <p>
+          This resets the name state variable to an empty string after it has
+          been added to the new array and rendered in the list
+        </p>
+        <p>This is the final code:</p>
+        <img src="/screenshots/useState/25.jpeg" alt="code screenshot" />
+        <p>And here is the UI to test out:</p>
+        <NameList />
       </main>
     </>
   );
