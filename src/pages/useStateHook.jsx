@@ -11,21 +11,19 @@ export default function UseStateHook() {
   return (
     <>
       <Header />
-      <h2 className="content-title">useState()</h2>
       <main>
+        <h2 className="content-title">useState()</h2>
         <p>
           For this, we will use a simple button with an initial value that
           increases by one every time it is clicked.
           <br />
           <br />
-          <span className="code-text">
-            const [count, setCount] = useState();
-          </span>
+          <img src="/screenshots/useState/1.jpeg" alt="code screenshot" />
           <br />
           The output of useState() is an array. The first item is the current
           value of the piece of state (here, &quot;count&quot;) and the second
           item is the setter function:<br></br>
-          <br></br>const [count, setCount] = useState(10); <br></br>
+          <img src="/screenshots/useState/2.jpeg" alt="code screenshot" />
           <br></br>useState(10) creates an array with the value 10. Within this
           array, the first item is the current value of that piece of state,
           which is assigned to the variable &quot;count&quot; Here in this
@@ -44,80 +42,135 @@ export default function UseStateHook() {
           event attribute and pass it a function, for e.g.:
           <br />
           <br />
-          <span className="code-text">{`onClick={incrementValue}`}</span>
+          <img src="/screenshots/useState/3.jpeg" alt="code screenshot" />
           <br />
           Then before the return():
           <br />
           <br />
-          <span className="code-text">{`function incrementValue() {
-          setCount(count + 1);
-        }`}</span>
+          <img src="/screenshots/useState/4.jpeg" alt="code screenshot" />
           <br />
           At this point, we have the following code:
           <br />
           <br />
-          <span className="code-text">
-            {`const [count, setCount] = useState(10);`}
-            <br />
-            {`function incrementValue() {
-              setCount(count + 1);
-            }`}
-            <br />
-            {`return(<button onClick={incrementValue}>Count = {count}</button>)`}
-          </span>
+          <img src="/screenshots/useState/5.jpeg" alt="code screenshot" />
           <br />
           What we&apos;ve done here is create a simple React component that
           manages a count value and provide it a button to increment it.
           <br />
           <br />
-          1. The line const [count, setCount] = useState(10); declares a state
-          variable named count and a corresponding function setCount using the
-          useState hook. The initial value of the count state is set to 10.
-          <br />
-          &sdot; useState is a built-in hook in React that allows functional
-          components to manage state. It returns an array with two elements: the
-          current state value (count in this case) and a function (setCount) to
-          update the state. <br />
-          &sdot; In this code, the count state is initialized to 10 by passing
-          it as an argument to the useState hook. The setCount function is used
-          to modify the value of count later.
-          <br />
-          <br />
-          2. The incrementValue function is declared - this simple function
-          increments (ie. adds 1) to the count value when called. This function
-          is responsible for updating the state.
-          <br />
-          &sdot; Inside the incrementValue function, setCount(count + 1); is
-          called to update the count state. It takes the current value of count,
-          adds 1 to it and sets the new value as the updated state value. This
-          then triggers a re-render of the component, which then reflects the
-          updated value in the UI/button
-          <br />
-          <br />
-          3. The button has an onClick attribute that specifies the
-          incrementValue function as the event handler when the button is
-          clicked.
-          <br />
-          &sdot; When the button is clicked, the onClick event triggers the
-          incrementValue function, which in turn updates the state by invoking
-          the setCount function. <br />
+          <ol>
+            <li>
+              The line const [count, setCount] = useState(10); declares a state
+              variable named count and a corresponding function setCount using
+              the useState hook. The initial value of the count state is set to
+              10. useState is a built-in hook in React that allows functional
+              components to manage state. It returns an array with two elements:
+              the current state value (count in this case) and a function
+              (setCount) to update the state. In this code, the count state is
+              initialized to 10 by passing it as an argument to the useState
+              hook. The setCount function is used to modify the value of count
+              later.
+            </li>
+            <li>
+              The incrementValue function is declared - this simple function
+              increments (ie. adds 1) to the count value when called. This
+              function is responsible for updating the state. Inside the
+              incrementValue function, setCount(count + 1); is called to update
+              the count state. It takes the current value of count, adds 1 to it
+              and sets the new value as the updated state value. This then
+              triggers a re-render of the component, which then reflects the
+              updated value in the UI/button
+            </li>
+            <li>
+              The button has an onClick attribute that specifies the
+              incrementValue function as the event handler when the button is
+              clicked. When the button is clicked, the onClick event triggers
+              the incrementValue function, which in turn updates the state by
+              invoking the setCount function.
+            </li>
+          </ol>
           &sdot; The text displayed on the button is {`Count={count}`} which
           shows the current value of count in the UI at that point in time.
           <br />
           <br />
-          NB. Using <span className="code-text">count++ </span>to increment the
-          value won&apos;t work. To understand why, see the case below:
+          NB. Using: <br />
+          <br />
+          <img src="/screenshots/useState/6.jpeg" alt="code screenshot" />
+          <br />
+          to increment the value won&apos;t work. Doing so will throw the error
+          &quot;Assignment to constant variable&quot; when the state variable is
+          declared with a const. When this is changed to let, the error
+          disappears, but the increment function still doesn&quot;t work. To
+          understand why, see the case below:
           <br />
           <br />
-          &sdot;{" "}
-          {`function getState() {
-            let value = 42;
-            return value;
-          }`}
-          <br />
+          <img src="/screenshots/useState/7.jpeg" alt="code screenshot" />
           <br />
           Here, we have a function called getState() which assigns the value 42
-          to the variable &apos;value&apos;. This is then returned.
+          to the variable &apos;value&apos; which is then returned. When we call
+          this function:
+          <br />
+          <br />
+          <img src="/screenshots/useState/8.jpeg" alt="code screenshot" />
+          <br />
+          As expected, it returns 42. We can now assign this function to a new
+          variable:
+          <br />
+          <br />
+          <span className="code-text">{`let myValue = getState()`}</span>
+          <br />
+          And then output the result:
+          <br />
+          <br />
+          <span className="code-text">{`console.log(myValue); OUTPUT : 42`}</span>
+          <br />
+          As expected, the value of the myValue variable is still 42. However,
+          if we now set this variable to a different value:
+          <br />
+          <br />
+          <span className="code-text">{`myValue = 22`}</span>
+          <br />
+          <span className="code-text">{`console.log(myValue); OUTPUT : 22`}</span>
+          <br />
+          This is expected because myValue is assigned as a let, so values can
+          be reassigned. The problem however comes when we call the state
+          function again. Currently this is the code:
+          <br />
+          <br />
+          <span className="code-text">
+            {`function getState() {`}
+            <br />
+            {`let value = 42;`}
+            <br />
+            {`return value;
+          }`}
+            <br />
+            <br />
+            {`let myValue = getState();`}
+            <br />
+            {`console.log(myValue); OUTPUTS 42`}
+            <br />
+            {`myValue = 22`}
+            <br />
+            {`console.log(myValue); OUTPUTS 22`}
+          </span>
+          <br />
+          If we now assign the <strong>same</strong> function to a{" "}
+          <strong>different</strong> variable this time:
+          <br />
+          <span className="code-text">{`let myValueAgain = getState();`}</span>
+          <span className="code-text">{`console.log(myValueAgain); OUTPUTS 42`}</span>
+          The original value assigned within the function at the beginning is
+          returned. This is a crucial thing to note - setting the value of a
+          return only sets the local copy of it. This is because scalars (e.g.
+          strings, numbers and booleans) are returned and passed by{" "}
+          <strong>value</strong> whereas arrays and objects are returned and
+          passed by <strong>reference</strong>. This means when you return
+          something by value, you don&quot;t get the value itself, but a copy of
+          it, which, as demonstrated in this case above, is <strong>not</strong>{" "}
+          the same thing. When myValue was reassigned the value 22, it was the
+          local copy which was set, not the value itself. This is a big
+          difference.
         </p>
       </main>
     </>

@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import UseStateHook from "./pages/useStateHook";
 import Home from "./pages/Home";
-
+import "@fontsource/mulish/400.css";
+import "@fontsource/mulish/700.css";
 function App() {
   return (
     <Router>

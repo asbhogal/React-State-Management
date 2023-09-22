@@ -1,11 +1,11 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Mulish, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -81,7 +81,7 @@ button:focus-visible {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  border-bottom: 1px solid #f9f9f9;
+  border-bottom: 1px solid #606060;
   padding-bottom: 25px;
 }
 
@@ -102,14 +102,27 @@ button:focus-visible {
   background-color: #1a1a1a;
 }
 
-@media only screen and (width >= 769px) {
-  main {
-    width: 50%;
-  }
+h1,
+h2,
+p {
+  color: #111111;
 }
 
-@media only screen and (width <= 768px) {
-  main {
-    width: 100%;
-  }
+p {
+  font-size: 24px;
+}
+
+img {
+  width: 100%;
+  border-radius: 1.5rem;
+}
+
+main {
+  max-width: 820px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+ol {
+  margin-left: 25px;
 }
