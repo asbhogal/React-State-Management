@@ -1,13 +1,38 @@
 import { useState } from "react";
 import Header from "../components/Header";
 
-export default function UseStateHook() {
+function Counter() {
   const [count, setCount] = useState(10);
 
   function incrementValue() {
     setCount(count + 1);
   }
 
+  return <button onClick={incrementValue}>Count = {count}</button>;
+}
+
+function NameList() {
+  const [list, setList] = useState(["Frodo", "Samwise", "Gandalf", "Gollum"]);
+  const [name, setName] = useState("");
+
+  return (
+    <div>
+      <ul>
+        {list.map((name) => (
+          <li key={name}>{name}</li>
+        ))}
+      </ul>
+      <input
+        name="name"
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+    </div>
+  );
+}
+
+export default function UseStateHook() {
   return (
     <>
       <Header />
@@ -32,7 +57,7 @@ export default function UseStateHook() {
           called &quot;setCount&quot; which is called at a later point in order
           to set the piece of state (e.g. to a different value)
         </p>
-        <button onClick={incrementValue}>Count = {count}</button>
+        <Counter />
         <p>The button is assigned the current value of count.</p>
         <p>
           To increment this when the button is clicked, we append the onClick
@@ -104,8 +129,8 @@ export default function UseStateHook() {
         <p>And then output the result:</p>
         <img src="/screenshots/useState/10.jpeg" alt="code screenshot" />
         <p>
-          As expected, the value of the myValue variable is still 42. However,
-          if we now set this variable to a different value:
+          As expected, the value of the myValue variable is still 42. If we now
+          set this variable to a different value:
         </p>
         <img src="/screenshots/useState/11.jpeg" alt="code screenshot" />
         <img src="/screenshots/useState/12.jpeg" alt="code screenshot" />
@@ -116,29 +141,88 @@ export default function UseStateHook() {
         </p>
         <img src="/screenshots/useState/13.jpeg" alt="code screenshot" />
         <p>
-          So far, the behaviour is as expected, however if we now assign the{" "}
+          So far, the behaviour is as expected, but if we now assign the{" "}
           <strong>same</strong> function to a <strong>different</strong>{" "}
           variable this time:
         </p>
         <img src="/screenshots/useState/14.jpeg" alt="code screenshot" />
         <p>
           We can see that the original value assigned within the function at the
-          beginning is returned. This is a crucial thing to note - setting the
-          value of a return only sets the local copy of it. This is because
-          scalars (e.g. strings, numbers and booleans) are returned and passed
-          by <strong>value</strong> whereas arrays and objects are returned and
-          passed by <strong>reference</strong>. This means when you return
-          something by value, you don&quot;t get the value itself, but a copy of
-          it, which, as demonstrated in this case above, is <strong>not</strong>{" "}
-          the same thing. When myValue was reassigned the value 22, it was the
-          local copy which was set, not the value itself. This is a big
-          difference.
+          beginning (ie. captured variable) is returned. This is a crucial thing
+          to note - setting the value of a return <strong>only</strong> sets the
+          local copy of it. This is because scalars (e.g. strings, numbers and
+          booleans) are returned and passed by <strong>value</strong> whereas
+          arrays and objects are returned and passed by{" "}
+          <strong>reference</strong>. This means when you return something by
+          value, you don&apos;t get the value itself, but a copy of it, which,
+          as demonstrated in this case above, is <strong>not</strong> the same
+          thing. When myValue was reassigned the value 22, it was the local copy
+          which was set, not the value itself. This is a big difference.
+        </p>
+        <p>
+          A case also cannot be argued for destructuring the array (which is
+          initially returned with a useState hook - see earlier), as the same
+          result occurs:
+        </p>
+        <img src="/screenshots/useState/15.jpeg" alt="code screenshot" />
+        <p>
+          While there is a way to make the getState() function achieve this
+          using enclosures, the approach is &quot;hacky&quot; and doesn&quot;t
+          leverage the capabilities and purpose of state management within
+          React.
         </p>
         <p className="accent-text">
           &ldquo;Scalars (e.g. strings, numbers and booleans) are returned and
           passed by value, whereas arrays and objects are returned and passed by
           reference.&ldquo;
         </p>
+        <p>
+          Another thing worth noting is each component that has the useState
+          hook within them is coupled with that particular instance, ie. their
+          state is updated independent of one another. If we consider the code
+          above, this time encapsulated within a separate Counter component, and
+          render this four times within another functional component, we can see
+          that they increment and hold their values independent of one another:
+        </p>
+        <img src="/screenshots/useState/16.jpeg" alt="code screenshot" />
+        <Counter />
+        <Counter />
+        <Counter />
+        <Counter />
+        <p>
+          The Counter components maintain their own count, and by clicking on
+          the buttons, these can be independently mutated and therefore maintain
+          their individual states.
+        </p>
+        <p>
+          (NB. in this article, the Counter component has been rendered directly
+          into this JSX)
+        </p>
+        <h3>Using Arrays</h3>
+        <p>
+          To use arrays instead of scalars (e.g. to demonstrate an array of
+          names, with the ability to add names to it), we can create a function
+          with some state to hold an initial list of names:
+        </p>
+        <img src="/screenshots/useState/17.jpeg" alt="code screenshot" />
+        <p>
+          We can now render this state to the virtual DOM by calling the map()
+          function on the array. We&apos;ll use this to display an unordered
+          list of the array elements, using the name values themselves as keys
+          (these are required in React to uniquely identify elements, help it
+          identify and track changes, additions or omissions and prevents
+          unnecessary re-rendering of the entire list by only dynamically
+          updating those which have changed)
+        </p>
+        <img src="/screenshots/useState/18.jpeg" alt="code screenshot" />
+        <NameList />
+        <p>
+          To add an item to the array, we&apos;ll need an input field. This is
+          where multiple pieces of state can be associated with the same
+          component. Here we&apos;ll also have another piece of state which is
+          initiated as an empty scalar string.
+        </p>
+        <img src="/screenshots/useState/19.jpeg" alt="code screenshot" />
       </main>
     </>
   );
